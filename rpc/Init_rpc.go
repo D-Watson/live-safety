@@ -6,13 +6,14 @@ import (
 	"net"
 
 	"google.golang.org/grpc"
+	"live_safty/conf"
 	"live_safty/log"
 	"live_safty/proto"
 )
 
 func RunRpcServer() {
 	ctx := context.Background()
-	lis, err := net.Listen("tcp", ":50051")
+	lis, err := net.Listen("tcp", conf.GlobalConfig.Server.Rpc.Host)
 	if err != nil {
 		log.Errorf(ctx, "failed to listen: %v", err)
 	}

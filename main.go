@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"live_safty/conf"
+	"live_safty/controller"
 	"live_safty/dbs"
 	"live_safty/rpc"
 	"live_safty/services"
@@ -20,12 +21,15 @@ func Init(ctx context.Context) {
 	if err != nil {
 		return
 	}
+	services.InitCron(ctx)
 }
 
 func main() {
 	ctx := context.Background()
 	Init(ctx)
 	// 开启定时任务
-	services.InitCron(ctx)
-	rpc.RunRpcServer()
+	// 启动gRPC服务
+	go rpc.RunRpcServer()
+	controller.InitRouters()
+
 }

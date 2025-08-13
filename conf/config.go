@@ -11,8 +11,23 @@ import (
 var GlobalConfig *Config
 
 type Config struct {
-	DB *Database `yaml:"database"`
+	DB     *Database `yaml:"database"`
+	Server *Server   `yaml:"server"`
 }
+
+type Server struct {
+	Name string `yaml:"name"`
+	Rpc  *Rpc   `yaml:"rpc"`
+	Http *Http  `yaml:"http"`
+}
+
+type Rpc struct {
+	Host string `yaml:"host"`
+}
+type Http struct {
+	Host string `yaml:"host"`
+}
+
 type Database struct {
 	Address string `yaml:"address"`
 	Passwd  string `yaml:"password"`

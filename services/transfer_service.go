@@ -2,9 +2,11 @@ package services
 
 import (
 	"context"
+	"encoding/hex"
 
 	"live_safty/consts"
 	"live_safty/dbs"
+	"live_safty/entity"
 	"live_safty/log"
 	pb "live_safty/proto"
 )
@@ -28,6 +30,48 @@ func getTokenByRole(ctx context.Context, role int32) (*dbs.KeyPair, error) {
 	return en, nil
 }
 
+func VerifyTransferParams(ctx context.Context, req *entity.TransferRequest) bool {
+	if len(req.TransferData) == 0 {
+		log.Errorf(ctx, "[param err] transfer data is nil.")
+		return false
+	}
+	if req.Role != consts.LIVE_BACKEND_REQ && req.Role != consts.LIVE_FRONTEND_REQ {
+		log.Errorf(ctx, "[param err] role number is wrong.")
+		return false
+	}
+	if req.Crypto != consts.LIVE_ENCRYPT && req.Crypto != consts.LIVE_DECRYPT {
+		log.Errorf(ctx, "[param err] the request is not encrypt or decrypt.")
+		return false
+	}
+	return true
+}
+
+func TransferHttp(ctx context.Context, req *entity.TransferRequest) (*entity.TransferResponse, error) {
+	kp, err := getTokenByRole(ctx, req.Role)
+	resp := &entity.TransferResponse{}
+	if err != nil || kp == nil {
+		return nil, err
+	}
+	switch req.Crypto {
+	case consts.LIVE_ENCRYPT:
+		res, er := RsaEncrypt([]byte(kp.PublicKey), []byte(req.TransferData))
+		if er != nil || res == nil {
+			return nil, er
+		}
+		resp.TransferData = hex.EncodeToString(res)
+		break
+	case consts.LIVE_DECRYPT:
+		data, _ := hex.DecodeString(req.TransferData)
+		res, er := RsaDecrypt([]byte(kp.PrivateKey), data)
+		if er != nil || res == nil {
+			return nil, er
+		}
+		resp.TransferData = string(res)
+		break
+	}
+	return resp, nil
+}
+
 // AcquireEncrypt 服务端用前端的公钥加密, 前端用服务端的公钥加密
 func AcquireEncrypt(ctx context.Context, req *pb.Data) (*pb.Data, error) {
 	kp, err := getTokenByRole(ctx, req.Role)
@@ -35,11 +79,11 @@ func AcquireEncrypt(ctx context.Context, req *pb.Data) (*pb.Data, error) {
 		return nil, err
 	}
 	data := req
-	res, err := RsaEncrypt(kp.PublicKey, []byte(data.TransData))
+	res, err := RsaEncrypt([]byte(kp.PublicKey), []byte(data.TransData))
 	if err != nil || res == nil {
 		return nil, err
 	}
-	data.EncryptData = string(res)
+	data.EncryptData = hex.EncodeToString(res)
 	return data, nil
 }
 
@@ -49,11 +93,12 @@ func AcquireDecrypt(ctx context.Context, req *pb.Data) (*pb.Data, error) {
 	if err != nil || kp == nil {
 		return nil, err
 	}
-	data := req
-	res, err := RsaDecrypt(kp.PrivateKey, []byte(data.TransData))
+	resp := req
+	data, _ := hex.DecodeString(req.TransData)
+	res, err := RsaDecrypt([]byte(kp.PrivateKey), data)
 	if err != nil || res == nil {
 		return nil, err
 	}
-	data.EncryptData = string(res)
-	return data, nil
+	resp.DecryptData = string(res)
+	return resp, nil
 }

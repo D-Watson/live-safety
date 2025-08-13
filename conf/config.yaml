@@ -1,3 +1,9 @@
+server:
+  name: live-safety
+  rpc:
+    host: 0.0.0.0:50051
+  http:
+    host: 0.0.0.0:50010
 database:
   address: "111.229.65.127:6379"
   password: "@Zry960531"

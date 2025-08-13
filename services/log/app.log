@@ -1,0 +1,6 @@
+2025-08-13T14:04:12.789|error|conf/config.go:39|msg=[configs] read file error%!(EXTRA *fs.PathError=open ./conf/config.yaml: no such file or directory)
+2025-08-13T14:06:15.868|error|conf/config.go:42|msg=[configs] read file error%!(EXTRA *fs.PathError=open ./conf/config.yaml: no such file or directory)
+2025-08-13T14:07:23.032|error|conf/config.go:43|msg=[configs] read file error%!(EXTRA *fs.PathError=open ./conf/config.yaml: no such file or directory)
+2025-08-13T14:08:13.045|error|conf/config.go:43|msg=[configs] read file error%!(EXTRA *fs.PathError=open ./conf/config.yaml: no such file or directory)
+2025-08-13T14:09:17.670|error|conf/config.go:43|msg=[configs] read file error%!(EXTRA *fs.PathError=open ./conf/config.yaml: no such file or directory)
+2025-08-13T14:10:51.418|error|conf/config.go:43|msg=[configs] read file error%!(EXTRA *fs.PathError=open ./conf/config.yaml: no such file or directory)
