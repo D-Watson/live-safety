@@ -4,11 +4,11 @@ import (
 	"context"
 	"encoding/hex"
 
-	"live_safty/consts"
-	"live_safty/dbs"
-	"live_safty/entity"
-	"live_safty/log"
-	pb "live_safty/proto"
+	"live_safety/consts"
+	"live_safety/dbs"
+	"live_safety/entity"
+	"live_safety/log"
+	pb "live_safety/proto"
 )
 
 func getTokenByRole(ctx context.Context, role int32) (*dbs.KeyPair, error) {
@@ -46,30 +46,30 @@ func VerifyTransferParams(ctx context.Context, req *entity.TransferRequest) bool
 	return true
 }
 
-func TransferHttp(ctx context.Context, req *entity.TransferRequest) (*entity.TransferResponse, error) {
+func TransferHttp(ctx context.Context, req *entity.TransferRequest) (*entity.TransferResponse, int) {
 	kp, err := getTokenByRole(ctx, req.Role)
 	resp := &entity.TransferResponse{}
 	if err != nil || kp == nil {
-		return nil, err
+		return nil, consts.GET_KEY_ERR
 	}
 	switch req.Crypto {
 	case consts.LIVE_ENCRYPT:
 		res, er := RsaEncrypt([]byte(kp.PublicKey), []byte(req.TransferData))
 		if er != nil || res == nil {
-			return nil, er
+			return nil, consts.ENCODE_ERR
 		}
 		resp.TransferData = hex.EncodeToString(res)
 		break
 	case consts.LIVE_DECRYPT:
-		data, _ := hex.DecodeString(req.TransferData)
+		data, er := hex.DecodeString(req.TransferData)
 		res, er := RsaDecrypt([]byte(kp.PrivateKey), data)
 		if er != nil || res == nil {
-			return nil, er
+			return nil, consts.DECODE_ERR
 		}
 		resp.TransferData = string(res)
 		break
 	}
-	return resp, nil
+	return resp, 0
 }
 
 // AcquireEncrypt 服务端用前端的公钥加密, 前端用服务端的公钥加密

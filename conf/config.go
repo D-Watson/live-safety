@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"gopkg.in/yaml.v3"
-	"live_safty/log"
+	"live_safety/log"
 )
 
 var GlobalConfig *Config

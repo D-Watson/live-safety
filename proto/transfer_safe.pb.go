@@ -306,7 +306,7 @@ const file_transfer_safe_proto_rawDesc = "" +
 	"\x17SecureTransferPublicKey\x12$.transfer_safe.GetPublicTokenRequest\x1a\".transfer_safe.GetPublicTokenReply\"\x00\x12h\n" +
 	"\x18SecureTransferPrivateKey\x12%.transfer_safe.GetPrivateTokenRequest\x1a#.transfer_safe.GetPrivateTokenReply\"\x00\x12;\n" +
 	"\rSecureEncrypt\x12\x13.transfer_safe.Data\x1a\x13.transfer_safe.Data\"\x00\x12;\n" +
-	"\rSecureDecrypt\x12\x13.transfer_safe.Data\x1a\x13.transfer_safe.Data\"\x00B\x12Z\x10live_safty/protob\x06proto3"
+	"\rSecureDecrypt\x12\x13.transfer_safe.Data\x1a\x13.transfer_safe.Data\"\x00B\x13Z\x11live_safety/protob\x06proto3"
 
 var (
 	file_transfer_safe_proto_rawDescOnce sync.Once

@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/redis/go-redis/v9"
-	"live_safty/conf"
+	"live_safety/conf"
 )
 
 var GlobalRedisCli *redis.Client

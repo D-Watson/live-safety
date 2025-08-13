@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"live_safty/conf"
-	"live_safty/log"
+	"live_safety/conf"
+	"live_safety/log"
 )
 
 func cors() gin.HandlerFunc {

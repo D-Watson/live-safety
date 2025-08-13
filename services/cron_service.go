@@ -5,9 +5,9 @@ import (
 	"sync"
 
 	"github.com/robfig/cron/v3"
-	"live_safty/consts"
-	"live_safty/dbs"
-	"live_safty/log"
+	"live_safety/consts"
+	"live_safety/dbs"
+	"live_safety/log"
 )
 
 func InitCron(ctx context.Context) {

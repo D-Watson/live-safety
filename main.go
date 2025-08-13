@@ -3,11 +3,11 @@ package main
 import (
 	"context"
 
-	"live_safty/conf"
-	"live_safty/controller"
-	"live_safty/dbs"
-	"live_safty/rpc"
-	"live_safty/services"
+	"live_safety/conf"
+	"live_safety/controller"
+	"live_safety/dbs"
+	"live_safety/rpc"
+	"live_safety/services"
 )
 
 func Init(ctx context.Context) {

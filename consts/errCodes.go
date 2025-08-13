@@ -7,8 +7,11 @@ import (
 )
 
 const (
-	HTTP_OK    = 200
-	PARAMS_ERR = 2001
+	HTTP_OK     = 200
+	PARAMS_ERR  = 2001
+	ENCODE_ERR  = 4001
+	DECODE_ERR  = 4002
+	GET_KEY_ERR = 4000
 )
 
 type BaseResp struct {

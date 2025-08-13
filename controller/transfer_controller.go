@@ -4,10 +4,10 @@ import (
 	"context"
 
 	"github.com/gin-gonic/gin"
-	"live_safty/consts"
-	"live_safty/entity"
-	"live_safty/log"
-	"live_safty/services"
+	"live_safety/consts"
+	"live_safety/entity"
+	"live_safety/log"
+	"live_safety/services"
 )
 
 func TransferData(c *gin.Context) {
@@ -24,10 +24,10 @@ func TransferData(c *gin.Context) {
 		consts.BuildRespWithCode(c, consts.PARAMS_ERR, resp)
 		return
 	}
-	var err error
-	resp, err = services.TransferHttp(ctx, req)
-	if err != nil {
-		log.Errorf(ctx, "[Transfer] request error--- ", err)
+	resp, code := services.TransferHttp(ctx, req)
+	if code > 0 {
+		log.Errorf(ctx, "[Transfer] request error--- ", code)
+		consts.BuildRespWithCode(c, code, resp)
 		return
 	}
 	consts.BuildSuccessResp(c, resp)

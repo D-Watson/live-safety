@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"time"
 
-	"live_safty/consts"
-	"live_safty/log"
+	"live_safety/consts"
+	"live_safety/log"
 )
 
 type KeyPair struct {

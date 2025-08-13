@@ -6,9 +6,9 @@ import (
 	"net"
 
 	"google.golang.org/grpc"
-	"live_safty/conf"
-	"live_safty/log"
-	"live_safty/proto"
+	"live_safety/conf"
+	"live_safety/log"
+	"live_safety/proto"
 )
 
 func RunRpcServer() {

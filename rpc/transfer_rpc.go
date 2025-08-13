@@ -3,8 +3,8 @@ package rpc
 import (
 	"context"
 
-	pb "live_safty/proto"
-	"live_safty/services"
+	pb "live_safety/proto"
+	"live_safety/services"
 )
 
 type SafeTransferServer struct {
