@@ -12,9 +12,9 @@ var GlobalRedisCli *redis.Client
 
 func InitRedisCli(ctx context.Context) error {
 	GlobalRedisCli = redis.NewClient(&redis.Options{
-		Addr:     conf.GlobalConfig.DB.Address, // Redis地址
-		Password: conf.GlobalConfig.DB.Passwd,  // 密码（无密码留空）
-		DB:       0,                            // 默认DB
+		Addr:     conf.GlobalConfig.DB.Redis.Address, // Redis地址
+		Password: conf.GlobalConfig.DB.Redis.Passwd,  // 密码（无密码留空）
+		DB:       0,                                  // 默认DB
 	})
 	// 测试连接
 	pong, err := GlobalRedisCli.Ping(ctx).Result()

@@ -4,6 +4,19 @@ server:
     host: 0.0.0.0:50051
   http:
     host: 0.0.0.0:50010
-database:
-  address: "111.229.65.127:6379"
-  password: "@Zry960531"
+  timeout: 30  # 超时时间（秒）
+databases:
+  mysql:
+    username: ""
+    password: ""
+    address:
+    dbname: ""
+    options:
+      timeout: 5000
+      readtimeout: 500
+      writetimeout: 500
+      max_open_conns: 100
+      max_idle_conns:
+  redis:
+    address: "111.229.65.127:6379"
+    password: "@Zry960531"

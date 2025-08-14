@@ -11,14 +11,15 @@ import (
 var GlobalConfig *Config
 
 type Config struct {
-	DB     *Database `yaml:"database"`
+	DB     *Database `yaml:"databases"`
 	Server *Server   `yaml:"server"`
 }
 
 type Server struct {
-	Name string `yaml:"name"`
-	Rpc  *Rpc   `yaml:"rpc"`
-	Http *Http  `yaml:"http"`
+	Name    string `yaml:"name"`
+	Rpc     *Rpc   `yaml:"rpc"`
+	Http    *Http  `yaml:"http"`
+	Timeout int    `yaml:"timeout"`
 }
 
 type Rpc struct {
@@ -29,6 +30,24 @@ type Http struct {
 }
 
 type Database struct {
+	Redis *RedisConf `yaml:"redis"`
+	Mysql *MysqlConf `yaml:"mysql"`
+}
+type MysqlConf struct {
+	UserName string  `yaml:"username"`
+	Password string  `yaml:"password"`
+	Address  string  `yaml:"address"`
+	DBName   string  `yaml:"dbname"`
+	Options  Options `yaml:"options"`
+}
+type Options struct {
+	MaxIdleConns int `yaml:"max_idle_conns"`
+	MaxOpenConns int `yaml:"max_open_conns"`
+	Timeout      int `yaml:"timeout"`
+	ReadTimeout  int `yaml:"readtimeout"`
+	WriteTimeout int `yaml:"writetimeout"`
+}
+type RedisConf struct {
 	Address string `yaml:"address"`
 	Passwd  string `yaml:"password"`
 }
