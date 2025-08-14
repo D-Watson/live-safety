@@ -17,7 +17,7 @@ func Init(ctx context.Context) {
 		return
 	}
 	//2. 初始化redis连接
-	err = dbs.InitRedisCli(ctx)
+	err = dbs.InitRedis(ctx)
 	if err != nil {
 		return
 	}
@@ -25,11 +25,11 @@ func Init(ctx context.Context) {
 }
 
 func main() {
+
 	ctx := context.Background()
 	Init(ctx)
 	//开启定时任务
 	//启动gRPC服务
 	go rpc.RunRpcServer()
 	controller.InitRouters()
-
 }
