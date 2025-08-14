@@ -4,9 +4,9 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/D-Watson/live-safety/conf"
+	"github.com/D-Watson/live-safety/log"
 	"github.com/gin-gonic/gin"
-	"live_safety/conf"
-	"live_safety/log"
 )
 
 func cors() gin.HandlerFunc {

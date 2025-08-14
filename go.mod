@@ -1,4 +1,4 @@
-module live_safety
+module github.com/D-Watson/live-safety
 
 go 1.23.2
 

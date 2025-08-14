@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"net"
 
+	"github.com/D-Watson/live-safety/conf"
+	"github.com/D-Watson/live-safety/log"
+	"github.com/D-Watson/live-safety/proto"
 	"google.golang.org/grpc"
-	"live_safety/conf"
-	"live_safety/log"
-	"live_safety/proto"
 )
 
 func RunRpcServer() {

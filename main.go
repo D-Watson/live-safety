@@ -3,11 +3,11 @@ package main
 import (
 	"context"
 
-	"live_safety/conf"
-	"live_safety/controller"
-	"live_safety/dbs"
-	"live_safety/rpc"
-	"live_safety/services"
+	"github.com/D-Watson/live-safety/conf"
+	"github.com/D-Watson/live-safety/controller"
+	"github.com/D-Watson/live-safety/dbs"
+	"github.com/D-Watson/live-safety/rpc"
+	"github.com/D-Watson/live-safety/services"
 )
 
 func Init(ctx context.Context) {
@@ -27,8 +27,8 @@ func Init(ctx context.Context) {
 func main() {
 	ctx := context.Background()
 	Init(ctx)
-	// 开启定时任务
-	// 启动gRPC服务
+	//开启定时任务
+	//启动gRPC服务
 	go rpc.RunRpcServer()
 	controller.InitRouters()
 

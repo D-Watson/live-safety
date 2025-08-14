@@ -4,11 +4,11 @@ import (
 	"context"
 	"encoding/hex"
 
-	"live_safety/consts"
-	"live_safety/dbs"
-	"live_safety/entity"
-	"live_safety/log"
-	pb "live_safety/proto"
+	"github.com/D-Watson/live-safety/consts"
+	"github.com/D-Watson/live-safety/dbs"
+	"github.com/D-Watson/live-safety/entity"
+	"github.com/D-Watson/live-safety/log"
+	pb "github.com/D-Watson/live-safety/proto"
 )
 
 func getTokenByRole(ctx context.Context, role int32) (*dbs.KeyPair, error) {

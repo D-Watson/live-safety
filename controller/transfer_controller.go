@@ -3,11 +3,11 @@ package controller
 import (
 	"context"
 
+	"github.com/D-Watson/live-safety/consts"
+	"github.com/D-Watson/live-safety/entity"
+	"github.com/D-Watson/live-safety/log"
+	"github.com/D-Watson/live-safety/services"
 	"github.com/gin-gonic/gin"
-	"live_safety/consts"
-	"live_safety/entity"
-	"live_safety/log"
-	"live_safety/services"
 )
 
 func TransferData(c *gin.Context) {

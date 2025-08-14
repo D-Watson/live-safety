@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/D-Watson/live-safety/conf"
 	"github.com/redis/go-redis/v9"
-	"live_safety/conf"
 )
 
 var GlobalRedisCli *redis.Client

@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"testing"
 
-	"live_safety/conf"
-	"live_safety/dbs"
-	"live_safety/services"
+	"github.com/D-Watson/live-safety/conf"
+	"github.com/D-Watson/live-safety/dbs"
+	"github.com/D-Watson/live-safety/services"
 )
 
 func TestRsaEncrypt(t *testing.T) {

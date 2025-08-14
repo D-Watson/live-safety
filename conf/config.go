@@ -4,8 +4,8 @@ import (
 	"context"
 	"os"
 
+	"github.com/D-Watson/live-safety/log"
 	"gopkg.in/yaml.v3"
-	"live_safety/log"
 )
 
 var GlobalConfig *Config
