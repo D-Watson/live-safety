@@ -23,7 +23,8 @@ type Server struct {
 }
 
 type Rpc struct {
-	Host string `yaml:"host"`
+	Host       string `yaml:"host"`
+	ServerHost string `yaml:"serverHost"`
 }
 type Http struct {
 	Host string `yaml:"host"`

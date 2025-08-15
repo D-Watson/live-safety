@@ -14,7 +14,7 @@ import (
 func TestRsaEncrypt(t *testing.T) {
 	ctx := context.Background()
 	conf.ParseConfig(ctx)
-	
+	dbs.InitRedis(ctx)
 	services.InitCron(ctx)
 	s := "hello223234"
 	m, _ := dbs.GlobalRedisCli.Get(context.Background(), "live:token:frontend").Result()

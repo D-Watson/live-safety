@@ -2,6 +2,7 @@ server:
   name: live-safety
   rpc:
     host: 0.0.0.0:50051
+    server-host: 0.0.0.0:5051
   http:
     host: 0.0.0.0:50010
   timeout: 30  # 超时时间（秒）
