@@ -3,6 +3,7 @@ package conf
 import (
 	"context"
 	"os"
+	"strings"
 
 	"github.com/D-Watson/live-safety/log"
 	"gopkg.in/yaml.v3"
@@ -13,6 +14,13 @@ var GlobalConfig *Config
 type Config struct {
 	DB     *Database `yaml:"databases"`
 	Server *Server   `yaml:"server"`
+	Kafka  *Kafka    `yaml:"kafka"`
+}
+
+type FormatedConfig struct {
+	DB     *Database  `yaml:"databases"`
+	Server *Server    `yaml:"server"`
+	Kafka  *KafkaConf `yaml:"kafka"`
 }
 
 type Server struct {
@@ -53,15 +61,41 @@ type RedisConf struct {
 	Passwd  string `yaml:"password"`
 }
 
+type Kafka struct {
+	Address  []string
+	Topic    string
+	MinBytes int
+	MaxBytes int
+}
+
+type KafkaConf struct {
+	Address  string `yaml:"address"`
+	Topic    string `yaml:"topic"`
+	MinBytes int    `yaml:"min_bytes"`
+	MaxBytes int    `yaml:"max_bytes"`
+}
+
 func ParseConfig(ctx context.Context) error {
 	data, err := os.ReadFile("./conf/config.yaml")
 	if err != nil {
 		log.Errorf(ctx, "[configs] read file error", err)
 		return err
 	}
-	if err = yaml.Unmarshal(data, &GlobalConfig); err != nil {
+	config := &FormatedConfig{}
+	if err = yaml.Unmarshal(data, &config); err != nil {
 		log.Error(ctx, "解析配置失败: %v\n", err)
 		return err
+	}
+	GlobalConfig.DB = config.DB
+	GlobalConfig.Server = config.Server
+	if config.Kafka != nil {
+		address := strings.Split(config.Kafka.Address, ",")
+		GlobalConfig.Kafka = &Kafka{
+			Address:  address,
+			Topic:    config.Kafka.Topic,
+			MinBytes: config.Kafka.MinBytes,
+			MaxBytes: config.Kafka.MaxBytes,
+		}
 	}
 	return nil
 }

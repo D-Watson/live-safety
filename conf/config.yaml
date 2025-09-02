@@ -21,3 +21,8 @@ databases:
   redis:
     address: "111.229.65.127:6379"
     password: "@Zry960531"
+kafka:
+  address: ""
+  topic: ""
+  min_bytes: 1e3
+  max_bytes: 1e6

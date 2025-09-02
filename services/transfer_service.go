@@ -72,7 +72,7 @@ func TransferHttp(ctx context.Context, req *entity.TransferRequest) (*entity.Tra
 	return resp, 0
 }
 
-// AcquireEncrypt 服务端用前端的公钥加密, 前端用服务端的公钥加密
+// AcquireEncrypt 服务端用服务端的公钥加密, 前端用前端的公钥加密
 func AcquireEncrypt(ctx context.Context, req *pb.Data) (*pb.Data, error) {
 	kp, err := getTokenByRole(ctx, req.Role)
 	if err != nil || kp == nil {
@@ -87,7 +87,7 @@ func AcquireEncrypt(ctx context.Context, req *pb.Data) (*pb.Data, error) {
 	return data, nil
 }
 
-// AcquireDecrypt 前端用自己的秘钥解密， 服务端用自己的秘钥解密
+// AcquireDecrypt 前端用服务端的秘钥解密， 服务端用前端的秘钥解密
 func AcquireDecrypt(ctx context.Context, req *pb.Data) (*pb.Data, error) {
 	kp, err := getTokenByRole(ctx, req.Role)
 	if err != nil || kp == nil {
