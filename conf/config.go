@@ -86,16 +86,19 @@ func ParseConfig(ctx context.Context) error {
 		log.Error(ctx, "解析配置失败: %v\n", err)
 		return err
 	}
-	GlobalConfig.DB = config.DB
-	GlobalConfig.Server = config.Server
+	conf := &Config{
+		DB:     config.DB,
+		Server: config.Server,
+	}
 	if config.Kafka != nil {
 		address := strings.Split(config.Kafka.Address, ",")
-		GlobalConfig.Kafka = &Kafka{
+		conf.Kafka = &Kafka{
 			Address:  address,
 			Topic:    config.Kafka.Topic,
 			MinBytes: config.Kafka.MinBytes,
 			MaxBytes: config.Kafka.MaxBytes,
 		}
 	}
+	GlobalConfig = conf
 	return nil
 }
